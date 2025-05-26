@@ -1,0 +1,388 @@
+### Obtener todos los comentarios guardados
+GET http://127.0.0.1:5000/api/comentarios HTTP/1.1
+Content-Type: application/json
+
+
+### Crear un comentario válido (POST)
+POST http://127.0.0.1:5000/api/comentarios HTTP/1.1
+Content-Type: application/json
+
+{
+  "texto": "El docente demuestra un excelente manejo del tema, es muy respetuoso y siempre responde nuestras preguntas con claridad. Aprendí bastante este semestre."
+}
+
+### crear curso docente
+POST http://127.0.0.1:5000/api/admin/asignar_cursos_docente HTTP/1.1
+Content-Type: application/json
+
+{
+  "docente_id": 13,
+  "cursos_ids": [7]
+}
+
+### Crear un comentario inválido (menos de 77 caracteres o 10 palabras)
+POST http://127.0.0.1:5000/api/comentarios HTTP/1.1
+Content-Type: application/json
+
+{
+  "texto": "Buen profesor."
+}
+
+### Crear un comentario válido, pero negativo
+POST http://127.0.0.1:5000/api/comentarios HTTP/1.1
+Content-Type: application/json
+
+{
+  "texto": "La profesora no llega temprano a las clases, dicta los temas muy rapido, y no responde a preguntas de mis companeros. No se preocupa por sus estudiantes de que si entendieron; sino que, solo preocupa por dar la clase y salir 20 minutos antes de que termine la clase."
+}
+
+
+------
+
+### Crear evaluación completa para docente y curso
+POST http://127.0.0.1:5000/api/evaluaciones HTTP/1.1
+Content-Type: application/json
+
+{
+  "curso_id": 3,
+  "docente_id": 3,
+  "calificaciones": {
+    "satisfaccion_general": "Excelente",
+    "metodologia": "Buena",
+    "comunicacion": "Buena",
+    "material_didactico": "Excelente",
+    "puntualidad": "Excelente",
+    "respeto": "Excelente",
+    "organizacion": "Buena",
+    "claridad": "Buena",
+    "retroalimentacion": "Buena",
+    "disponibilidad": "Buena"
+  },
+  "comentario_docente": "El profesor Diego explica claramente, tiene dominio de cada concepto y ofrece retroalimentación valiosa.",
+  "comentario_curso": "El curso de Complejidad Algorítmica estuvo bien estructurado y permitió comprender temas complejos de manera progresiva."
+}
+
+
+
+--------------
+### Mostrar todos los  docente
+GET http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+
+### Crear docente
+POST http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Fernando Concha"
+}
+
+
+### Crear curso para el docente
+POST http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Fisica I",
+  "docente_id": 2
+}
+---------------------
+### Crear evaluación completa
+POST http://127.0.0.1:5000/api/evaluaciones HTTP/1.1
+Content-Type: application/json
+
+{
+  "docente_id": 4,
+  "curso_id": 5,
+  "calificaciones": {
+    "satisfaccion_general": "Excelente",
+    "metodologia": "Buena",
+    "comunicacion": "Excelente",
+    "material_didactico": "Bueno",
+    "puntualidad": "Excelente",
+    "respeto": "Excelente",
+    "organizacion": "Buena",
+    "claridad": "Excelente",
+    "retroalimentacion": "Buena",
+    "disponibilidad": "Excelente"
+  },
+  "comentario_docente": "El profesor explica claramente cada tema, tiene dominio del contenido y siempre está dispuesto a resolver dudas.",
+  "comentario_curso": "El curso fue completo, con materiales útiles y bien estructurado. Aprendí mucho en cada sesión."
+}
+
+
+### Evaluación negativa para Ana Maria Cavidez
+POST http://127.0.0.1:5000/api/evaluaciones HTTP/1.1
+Content-Type: application/json
+
+{
+  "docente_id": 1,
+  "curso_id": 1,
+  "calificaciones": {
+    "satisfaccion_general": "Malo",
+    "metodologia": "Malo",
+    "comunicacion": "Regular",
+    "material_didactico": "Malo",
+    "puntualidad": "Regular",
+    "respeto": "Bueno",
+    "organizacion": "Malo",
+    "claridad": "Regular",
+    "retroalimentacion": "Mala",
+    "disponibilidad": "Regular"
+  },
+  "comentario_docente": "La profesora no respondía con claridad las preguntas, se notaba falta de dominio en algunos temas y eso dificultó el aprendizaje.",
+  "comentario_curso": "El contenido del curso fue confuso y desorganizado, no hubo una secuencia lógica y muchas veces faltó orientación sobre los temas."
+}
+
+
+### Evaluación negativa total para Diego Fernando Prado (Base de Datos)
+POST http://127.0.0.1:5000/api/evaluaciones HTTP/1.1
+Content-Type: application/json
+
+{
+  "docente_id": 4,
+  "curso_id": 6,
+  "calificaciones": {
+    "satisfaccion_general": "Malo",
+    "metodologia": "Malo",
+    "comunicacion": "Malo",
+    "material_didactico": "Malo",
+    "puntualidad": "Malo",
+    "respeto": "Malo",
+    "organizacion": "Malo",
+    "claridad": "Malo",
+    "retroalimentacion": "Mala",
+    "disponibilidad": "Malo"
+  },
+  "comentario_docente": "El profesor no explicaba nada, llegaba tarde constantemente, y cuando venía no se entendía lo que decía. No hubo interés por enseñar.",
+  "comentario_curso": "El curso fue un desastre, los temas no se abordaron correctamente, no se entregó material útil y no hubo seguimiento del avance de los estudiantes."
+}
+###
+
+
+---------------------
+### Obtener evaluaciones de un docente (reemplaza el ID con uno válido)}
+GET http://127.0.0.1:5000/api/evaluaciones/docente/4 HTTP/1.1
+Content-Type: application/json
+
+
+### Obtener todos los docentes
+GET http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+### Obtener cursos del docente con ID 4
+GET http://127.0.0.1:5000/api/cursos/docente/4 HTTP/1.1
+Content-Type: application/json
+
+
+
+### Obtener todos los cursos 
+GET http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+
+
+### Obtener todas las evaluaciones (Administrador)
+GET http://127.0.0.1:5000/api/evaluaciones HTTP/1.1
+Content-Type: application/json
+
+
+------------------------------------
+### Mostrar todos los  docente
+GET http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+
+### Evaluaciones dependiendo del ID del docente
+GET http://127.0.0.1:5000/api/evaluaciones/docente/1 HTTP/1.1
+Content-Type: application/json
+
+
+### Mostrar todos las evaluaciones
+GET http://127.0.0.1:5000/api/evaluaciones HTTP/1.1
+Content-Type: application/json
+
+
+### Mostrar dashboard de un docente con su curso especifico
+GET http://127.0.0.1:5000/api/dashboard/docente/1/5
+Content-Type: application/json
+
+### Mostrar dashboard de un docente en general
+GET http://127.0.0.1:5000/api/dashboard/docente/4
+Content-Type: application/json
+
+### Mostrar dashboard para el admin
+GET http://127.0.0.1:5000/api/dashboard/admin
+Content-Type: application/json
+
+
+
+
+
+#EJEMPLO EN BASE A 5 DOCENTES CON SUS RESPECTIVOS CURSOS.
+------------------------------------
+
+### Crear docentes
+POST http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Ana Maria Cavidez"
+}
+
+###
+
+POST http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Jose Fernando Concha"
+}
+
+###
+
+POST http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Ana Gabriela Fernandez"
+}
+
+###
+
+POST http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Diego Fernando Prado"
+}
+
+###
+
+POST http://127.0.0.1:5000/api/docentes HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Diana Patricia Garzon"
+}
+
+----------------------------------
+### Obtener cursos del docente con ID 1
+GET http://127.0.0.1:5000/api/cursos/docente/3 HTTP/1.1
+Content-Type: application/json
+
+### Crear cursos para cada docente
+
+----------------------------------
+
+### Crear curso - Ingeniería de Software II (Ana Maria Cavidez - ID 1)
+POST http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Ingeniería de Software II",
+  "docente_id": 1
+}
+
+### Crear curso - Probabilidad y Estadística (Jose Fernando Concha - ID 2)
+POST http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Probabilidad y Estadística",
+  "docente_id": 2
+}
+
+### Crear curso - Base de Datos (Ana Gabriela Fernandez - ID 3)
+POST http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Base de Datos",
+  "docente_id": 3
+}
+
+### Crear curso - Desarrollo Web (Ana Gabriela Fernandez - ID 3)
+POST http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Desarrollo Web",
+  "docente_id": 3
+}
+
+### Crear curso - Complejidad Algorítmica (Diego Fernando Prado - ID 4)
+POST http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Complejidad Algorítmica",
+  "docente_id": 4
+}
+### Crear curso - Base de Datos II (Diego Fernando Prado - ID 4)
+POST http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Base de Datos II",
+  "docente_id": 4
+}
+
+### Crear curso - Inglés III (Diana Patricia Garzón - ID 5)
+POST http://127.0.0.1:5000/api/cursos HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Inglés III",
+  "docente_id": 5
+}
+
+
+
+---------------------
+### Descargar reporte Excel del curso "Ingeniería de Software II" de la docente Ana Maria Cavidez
+GET http://127.0.0.1:5000/api/reportes/docente/2/curso/2/excel
+
+### Descargar reporte PDF dependiendo del curso y docente
+GET http://127.0.0.1:5000/api/reportes/docente/1/curso/1/pdf
+
+
+
+### Descargar reporte excel completo para el admin
+GET http://127.0.0.1:5000/api/reportes/admin/excel
+
+### Enviar correos a los docentes con sus respectivos reportes
+GET http://localhost:5000/api/reportes/enviar-correos
+
+
+
+### Iniciar sesión con cualquier usuario registrado
+POST http://localhost:5000/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "admin@uniautonoma.edu.co",
+  "password": "123"
+}
+
+
+### Ejemplo para ver el promedio de un docente en un curso específico
+GET http://localhost:5000/api/promedios/docente/3 HTTP/1.1
+Content-Type: application/json
+
+###
+GET http://localhost:5000/api/promedios/docente/1/curso/1 HTTP/1.1
+Content-Type: application/json
+
+
+### mostrar docentes con sus cursos
+GET http://localhost:5000/api/docentes-con-cursos HTTP/1.1
+Content-Type: application/json
+
+### mostrar evaluaciones por docentes con sus cursos
+GET http://localhost:5000/api/evaluaciones/docente-curso HTTP/1.1
+Content-Type: application/json
+### mostrar evaluaciones por docentes con sus cursos
+GET http://localhost:5000/api/evaluaciones/docente/2 HTTP/1.1
+Content-Type: application/json

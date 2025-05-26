@@ -1,0 +1,94 @@
+classDiagram
+    %% Entidades de dominio (SQLAlchemy Models)
+    class Docente {
+      +int id
+      +String nombre
+      +List~Curso~ cursos
+      +toDict()
+    }
+    class Curso {
+      +int id
+      +String nombre
+      +int docente_id
+      +Docente docente
+      +List~Evaluacion~ evaluaciones
+      +toDict()
+    }
+    class Evaluacion {
+      +int id
+      +String comentario_docente
+      +String comentario_curso
+      +Date fecha
+      +String sentimiento_docente
+      +String sentimiento_curso
+      +Calificaciones calificaciones
+      +toDict()
+    }
+    class Calificaciones {
+      +String satisfaccion_general
+      +String metodologia
+      +String comunicacion
+      +String material_didactico
+      +String puntualidad
+      +String respeto
+      +String organizacion
+      +String claridad
+      +String retroalimentacion
+      +String disponibilidad
+    }
+
+    %% Relaciones
+    Docente "1" o-- "*" Curso : imparte
+    Curso "1" o-- "*" Evaluacion : recibe
+    Evaluacion "1" *-- "1" Calificaciones : contiene
+
+    %% Componentes de servicio
+    class EvaluacionesService {
+      +List~Evaluacion~ get_by_docente_curso(int docenteId, int cursoId)
+      +void save(Evaluacion e)
+    }
+    class ReporteService {
+      +BytesIO generarPdf(int docenteId, int cursoId)
+      +BytesIO generarExcelAdmin()
+    }
+    class NLPService {
+      +String analizar_sentimiento(String text)
+      +void entrenar_modelo(String dataPath)
+    }
+
+    %% Relaciones servicio-dominio
+    EvaluacionesService ..> Docente
+    EvaluacionesService ..> Curso
+    EvaluacionesService ..> Evaluacion
+
+    ReporteService ..> Evaluacion
+    ReporteService ..> Docente
+    ReporteService ..> Curso
+
+    NLPService ..> Evaluacion : analiza comentario
+
+    %% Frontend React Components
+    class Administrador {
+      -state docentes
+      -state selectedDocente
+      -state selectedCurso
+      -state evaluaciones
+      -state filtros
+      +void obtenerEvaluaciones()
+      +void descargarExcelAdmin()
+      +void descargarPDF()
+    }
+    class DocentesComponent {
+      -state cursos
+      -state selectedCurso
+      -state evaluaciones
+      -state filtros
+      +void cargarEvaluaciones(userId)
+      +void descargarPDF()
+    }
+
+    Administrador ..> EvaluacionesService : usa
+    Administrador ..> ReporteService : usa
+    Administrador ..> NLPService : usa
+    DocentesComponent ..> EvaluacionesService : usa
+    DocentesComponent ..> ReporteService : usa

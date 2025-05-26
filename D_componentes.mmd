@@ -1,0 +1,39 @@
+classDiagram  
+  %% Diagrama de Componentes
+  componentDiagram
+    %% Componentes principales
+    component Frontend {
+      [Administrador]
+      [DocentesComponent]
+    }
+
+    component Backend {
+      [EvaluacionesService]
+      [ReporteService]
+      [NLPService]
+    }
+
+    component Dominio {
+      [Docente]
+      [Curso]
+      [Evaluacion]
+      [Calificaciones]
+    }
+
+    %% Relaciones entre componentes
+    [Administrador] --> [EvaluacionesService] : usa
+    [Administrador] --> [ReporteService] : usa
+    [Administrador] --> [NLPService] : usa
+
+    [DocentesComponent] --> [EvaluacionesService] : usa
+    [DocentesComponent] --> [ReporteService] : usa
+
+    [EvaluacionesService] --> [Docente] : relación
+    [EvaluacionesService] --> [Curso] : relación
+    [EvaluacionesService] --> [Evaluacion] : relación
+
+    [ReporteService] --> [Evaluacion] : relación
+    [ReporteService] --> [Docente] : relación
+    [ReporteService] --> [Curso] : relación
+
+    [NLPService] --> [Evaluacion] : analiza comentario

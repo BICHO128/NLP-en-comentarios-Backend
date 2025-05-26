@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Evaluación Docente</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            margin: 40px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .table th {
+            background-color: #ecf0f1;
+            text-align: left;
+        }
+        .highlight {
+            background-color: #f9f9f9;
+        }
+        .grafica {
+            height: 200px;
+            margin-top: 20px;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Universidad Autónoma del Caribe</h1>
+        <h2>Reporte de Evaluación Docente</h2>
+    </div>
+
+    <div class="section">
+        <h3>Información del Docente</h3>
+        <p><strong>Nombre:</strong> {{ docente_nombre }}</p>
+        <p><strong>Curso Evaluado:</strong> {{ curso_nombre }}</p>
+        <p><strong>Total de Evaluaciones:</strong> {{ total_evaluaciones }}</p>
+    </div>
+
+    <div class="section">
+        <h3>Resumen por Criterio</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Criterio</th>
+                    <th>Valor</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for criterio in resumen_criterios %}
+                <tr>
+                    <td>{{ criterio.nombre }}</td>
+                    <td>{{ criterio.valor }}</td>
+                    <td>{{ criterio.cantidad }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h3>Sentimientos del Estudiante</h3>
+        <p><strong>Curso:</strong> {{ resumen_sentimiento_curso }}</p>
+        <p><strong>Docente:</strong> {{ resumen_sentimiento_docente }}</p>
+    </div>
+
+    <div class="section">
+        <h3>Comentarios de Evaluación</h3>
+        {% for comentario in comentarios %}
+        <div class="highlight">
+            <p><strong>Comentario al Docente:</strong> {{ comentario.comentario_docente }}</p>
+            <p><strong>Comentario al Curso:</strong> {{ comentario.comentario_curso }}</p>
+            <p><em>Sentimiento docente: {{ comentario.sentimiento_docente }}</em> | 
+               <em>Sentimiento curso: {{ comentario.sentimiento_curso }}</em></p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h3>Gráfica de Resultados</h3>
+        <div class="grafica">
+            (Aquí irá la imagen de la gráfica generada dinámicamente)
+        </div>
+    </div>
+
+</body>
+</html>

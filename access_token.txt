@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.3 Python/3.10.11
+Date: Fri, 18 Apr 2025 08:30:46 GMT
+Content-Type: application/json
+Content-Length: 591
+Connection: close
+
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NDk2NTA0NiwianRpIjoiYjc2MWViN2ItZmE5OC00MjFlLWI5NGUtYjA1MzQxZDVhOTFhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MiwiZW1haWwiOiJkaWFuYS5nYXJ6b24ubUB1bmlhdXRvbm9tYS5lZHUuY28iLCJ1c2VybmFtZSI6ImRpYW5hIiwiaXNfYWRtaW4iOmZhbHNlfSwibmJmIjoxNzQ0OTY1MDQ2LCJjc3JmIjoiOTAzNjdhYzItZGY4Mi00ZjhkLThjMWItMmY0Mzc3NTkyMTIxIiwiZXhwIjoxNzQ0OTY1OTQ2fQ.ZirSA6LNUv5zxT5Srg4uNKkXH9LX8bda3Dm7-Ipb3TU",
+  "user": {
+    "email": "diana.garzon.m@uniautonoma.edu.co",
+    "id": 2,
+    "is_admin": false,
+    "username": "diana"
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "python.analysis.importFormat": "relative",
+    "CodeGPT.apiKey": "CodeGPT Plus Beta",
+    "git.ignoreLimitWarning": true,
+    "python.testing.pytestArgs": [
+        "entorno-nlp"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

@@ -1,0 +1,45 @@
+sequenceDiagram
+  autonumber
+  participant U as Usuario (Admin/Docente)
+  participant Front as Frontend (React)
+  participant API as Backend (Flask)
+  participant EvalSvc as EvaluacionesService
+  participant DB as Base de Datos (MySQL)
+  participant ReportSvc as ReporteService
+  participant Template as Jinja2
+  participant Weasy as WeasyPrint
+
+  %% Flujo de obtención de evaluaciones
+  U->>Front: selecciona docente y curso
+  Front->>API: GET /api/evaluaciones/docente-curso?nombre_docente=...&nombre_curso=...
+  API->>EvalSvc: getByDocenteCurso(docenteId, cursoId)
+  EvalSvc->>DB: SELECT * FROM evaluaciones WHERE docente_id=? AND curso_id=?
+  DB-->>EvalSvc: filas de evaluaciones
+  EvalSvc-->>API: lista de Evaluacion
+  API-->>Front: JSON evaluaciones
+  Front-->>U: renderiza gráficos y comentarios
+
+  %% Flujo de descarga de PDF
+  U->>Front: hace clic en "Descargar PDF"
+  Front->>API: GET /api/reportes/docente/{docenteId}/curso/{cursoId}/pdf
+  API->>ReportSvc: generarPdf(docenteId, cursoId)
+  ReportSvc->>EvalSvc: getByDocenteCurso(docenteId, cursoId)
+  EvalSvc->>DB: SELECT * FROM evaluaciones WHERE docente_id=? AND curso_id=?
+  DB-->>EvalSvc: filas de evaluaciones
+  EvalSvc-->>ReportSvc: lista de Evaluacion
+  ReportSvc->>Template: render("reporte_docente.html", datos)
+  Template-->>ReportSvc: HTML completo
+  ReportSvc->>Weasy: HTML → PDF (BytesIO)
+  Weasy-->>ReportSvc: buffer PDF
+  ReportSvc-->>API: send_file(buffer, as_attachment)
+  API-->>Front: flujo de bytes PDF
+  Front-->>U: dispara descarga del archivo
+
+  %% (Opcional) Flujo de registro de evaluación
+  U->>Front: POST /api/evaluaciones {comentarios, calificaciones,...}
+  Front->>API: envía JSON
+  API->>NLP as NLPService: analizar_sentimiento(texto)
+  NLPService-->>API: "positivo"/"neutral"/"negativo"
+  API->>DB: INSERT INTO evaluaciones (...)
+  DB-->>API: confirmación
+  API-->>Front: {"mensaje": "Evaluación registrada correctamente"}

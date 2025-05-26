@@ -1,0 +1,8 @@
+# Included because many Paas's require a requirements.txt file in the project root
+# Just installs the production requirements.
+-r requirements/prod.txt
+
+spacy[lookups,transformers]>=3.2.0
+es-core-news-sm>=3.2.0
+# (opcional si usas transformers GPU)
+torch>=1.12.0

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Evaluación Docente</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            margin: 1cm; /* Márgenes de 1 cm en todos los lados */
+        }
+          
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #227cd6;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header img {
+            position: fixed;
+            top: 0;
+            width: 80px; /* Ajusta el tamaño del logo */
+            height: auto;
+        }
+
+        .header .logo-left {
+            left: -10px;
+        }
+
+        .header .logo-right {
+            right: 0;
+        }
+
+        .header h1, .header h2 {
+            margin: 0;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .criterio_promedio {
+            color: #000000;
+            right: 100px;
+            text-align: end;
+        }
+
+        .criterio {
+            text-align: left;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .table th, .table td {
+            border: 1px solid #000000;
+            padding: 8px;
+        }
+        .table th {
+            background-color: #3ac2e4;
+        }
+        .highlight {
+            background-color: #ffffff;
+        }
+        .Nota_promedio {
+            right: 100px;
+            text-align: end;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header" style="text-align: center; border-bottom: 2px solid #227cd6; padding: 10px 0; margin-bottom: 20px; position: relative;">
+        <img src="http://localhost:5000/static/imagenes/1.png"  alt="Logo Izquierdo" style="position: absolute; top: -90px; left: -90px; width: 80px; height: auto;">
+        <img src="http://localhost:5000/static/imagenes/2.png" alt="Logo derecho" style="position: absolute; top: -90px; right: -90px; width: 80px; height: auto;">
+        <h1 style="margin: 0;">Corporación Universitaria Autónoma del Cauca</h1>
+        <h2 style="margin: 0;">Reporte de Evaluación Docente</h2>
+    </div>
+
+    <div class="section">
+        <h3>Información del Docente</h3>
+        <p><strong>Nombre:</strong> {{ docente }}</p>
+        <p><strong>Curso Evaluado:</strong> {{ curso }}</p>
+        <!-- <p><strong>Total de Evaluaciones:</strong> {{ comentarios | length }}</p> -->
+        <p><strong>Nota Final Promedio:</strong> {{ nota_final }}</p>
+    </div>
+
+    <div class="section">
+        <h3>Resumen por Criterio</h3>
+        <table class="table">
+            <thead>
+              <tr>
+                <th class="criterio">Criterio</th>
+                <th class="Nota_promedio">Nota Promedio</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for criterio in criterios %}
+              <tr>
+                <td>{{ criterio.criterio }}</td>
+                <td class="criterio_promedio">{{ criterio.promedio }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          
+    </div> 
+
+    <!-- <div class="section">
+        <h3>Comentarios de Evaluación</h3>
+        {% for comentario in comentarios %}
+        <div class="highlight">
+            <p><strong>Comentario al Docente:</strong> {{ comentario.comentario_docente }}</p>
+            <p><strong>Comentario al Curso:</strong> {{ comentario.comentario_curso }}</p>
+            <p><em>Sentimiento docente: {{ comentario.sentimiento_docente }}</em> | 
+               <em>Sentimiento curso: {{ comentario.sentimiento_curso }}</em></p>
+        </div>
+        {% endfor %}
+    </div> -->
+
+</body>
+</html>

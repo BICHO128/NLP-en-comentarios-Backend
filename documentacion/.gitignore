@@ -1,0 +1,66 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+.webassets-cache
+
+# Virtualenvs
+env/
+
+# npm
+/node_modules/
+
+# webpack-built files
+/evaluacion/static/build/
+
+# Configuration
+.env
+
+# Development database
+*.db
+
+
+# ruta de archivos de entorno virtual para el entremanieento IA
+entorno-training/
+entorno-training/Lib/site-packages/torch/lib/torch_cpu.dll
+entorno-training/Lib/site-packages/es_core_news_lg/es_core_news_lg-3.8.0/vocab/vectors
+entorno-training/Lib/site-packages/torch/lib/dnnl.lib
+entorno-training/
